@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--	<bean id="myCoach"-->
+    <!--		  class="main.coaches.CricketCoachh">-->
+    <!--	</bean>-->
+
+
+    <context:property-placeholder location="classpath:xml-res/sport.properties"/>
+
+
+    <bean id="myFortuneServiceImpl"
+          class="configtest.xml.fortuneservices.FortuneServiceImpl">
+    </bean>
+
+    <bean id="myFortuneServiceImpl2"
+          class="configtest.xml.fortuneservices.RandomFortuneService">
+    </bean>
+
+    <!--	<bean id="myCoach"-->
+    <!--		  class="main.coaches.TrackCoach">-->
+    <!--		<constructor-arg ref="myFortuneServiceImpl"/>-->
+    <!--	</bean>-->
+
+    <bean id="myCoach"
+          class="configtest.xml.coaches.CricketCoach"
+          scope="prototype"
+          init-method="initMethod"
+          destroy-method="destroyMethod">
+        <property name="fortuneService" ref="myFortuneServiceImpl"/>
+        <property name="email" value="${foo.email}"/>
+        <property name="team" value="${foo.team}"/>
+    </bean>
+
+
+</beans>
+
+
+
+
+
